@@ -14,8 +14,6 @@
 			</div>	
 			<div id="content-compare">
 			</div>
-			
-			
 		</div>
 		</div>
 	</section>

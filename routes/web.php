@@ -64,3 +64,5 @@ Route::get('/compare','CompareController@index')->name('view.compare');
 Route::post('search-keyup','CompareController@search');
 Route::get('/search-compare','CompareController@searchingCompare');
 Route::get('add-compare/{id}','CompareController@addCompare');
+Route::get('/destroy-compare/{id}','CompareController@destroy');
+Route::get('/destroy-compare-first/{id}','CompareController@destroy_first');

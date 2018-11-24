@@ -392,13 +392,13 @@ function show_info(id)
 
 function add_compare(id)
 {
+    
     $.ajax({
       url: "add-compare/"+id,
-      context: document.body,
+      //context: document.body,
       type: 'GET',
     }).done(function(response) {
-        $('#content-compare').load('add-compare/'+id);
-        //console.log(response);
+        $('#content-compare').html(response);
     });
 }
 $(document).ready(function(){
@@ -447,3 +447,22 @@ $(document).ready(function(){
     $('#content-compare').load('/search-compare');
 
 })
+var destroyCompare = function(id){
+    $.ajax({
+      url: "destroy-compare/"+id,
+      //context: document.body,
+      type: 'GET',
+    }).done(function(response) {
+        $('#content-compare').html(response);
+    });
+}
+var destroy_compare_first = function(id)
+{
+    $.ajax({
+      url: "destroy-compare-first/"+id,
+      //context: document.body,
+      type: 'GET',
+    }).done(function(response) {
+        $('#content-compare').html(response);
+    });
+}

@@ -9,7 +9,7 @@
 <meta name="description" content="Bootstrap 3 template for corporate business" />
 <meta name="author" content="http://iweb-studio.com" />
 <!-- css -->
-<link rel="stylesheet" href="client/https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <link href="client/css/bootstrap.min.css" rel="stylesheet" />
 <link href="client/plugins/flexslider/flexslider.css" rel="stylesheet" media="screen" />	
 <link href="client/css/cubeportfolio.min.css" rel="stylesheet" />

@@ -12,6 +12,8 @@ class CompareController extends Controller
 {
     public function index()
     {
+        session()->forget('first_car');
+        session()->forget('second_car');
     	$category = CategoryCar::all();
     	$style =  StyleCar::all();
     	$under_1b = Car::where('cars_price','<','1000000000')->paginate(6);
@@ -60,9 +62,49 @@ class CompareController extends Controller
     }
     public function addCompare($id)
     {
+        //session()->flush();
     	$category = CategoryCar::all();
     	$style =  StyleCar::all();
-    	$under_1b = Car::where('cars_price','<','1000000000')->paginate(6);
+    	$car = Car::where('cars_id',$id)->first();
+
+        //var_dump(session()->has('first_car')); die;
+        
+        if( !session()->has('first_car') )
+        {
+            session()->put('first_car',$car);
+            return view('client.compare.oneCar',compact('category','style'));
+        }else{
+            session()->put('second_car',$car);
+            return view('client.compare.twoCar',compact('category','style'));
+        }
+        
+    }
+    public function destroy($id)
+    {
+        $category = CategoryCar::all();
+        $style =  StyleCar::all();
+        $first_car = session()->get('first_car');
+
+        $second_car = session()->get('second_car');
+
+        if($first_car->cars_id == $id)
+        {
+            session(['first_car'=>$second_car]);
+            return view('client.compare.oneCar',compact('category','style'));
+        }
+        else
+        {
+            session()->forget('second_car');
+            return view('client.compare.oneCar',compact('category','style'));
+        }
+
+    }
+    public function destroy_first($id)
+    {
+        session()->forget('first_car');
+        $category = CategoryCar::all();
+        $style =  StyleCar::all();
+        $under_1b = Car::where('cars_price','<','1000000000')->paginate(6);
 
         $in_1b_2b = Car::where('cars_price','>=','1000000000')
                 ->where('cars_price','<','2000000000')
@@ -71,10 +113,7 @@ class CompareController extends Controller
                 ->where('cars_price','<','5000000000')
                 ->paginate(6);
         $over_5b = Car::where('cars_price','>','5000000000')->paginate(6);
-    	$car = Car::where('cars_id',$id)->first();
-    	
-    	
-    	return view('client.compare.oneCar',compact('car','check','category','style','under_1b','in_1b_2b','in_2b_5b','over_5b'));
+        $cars = Car::all();
+        return view('client.compare',compact('cars','category','style','under_1b','in_1b_2b','in_2b_5b','over_5b'));
     }
-    
 }

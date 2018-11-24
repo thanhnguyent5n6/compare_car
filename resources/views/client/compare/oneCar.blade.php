@@ -2,12 +2,15 @@
 	<div class="row">
 		<div class="col-lg-6 first_compare">
 			<div class="card card-car">
-				<!-- <div class="destroyCompare">
-					<a href="compare.html">
+				<?php 
+					$car = session()->get('first_car');
+				?>
+				<div class="destroyCompare" onclick="destroy_compare_first(<?php echo $car->id; ?>);">
+					<a>
 						<i class="fas fa-times"></i>
 					</a>
-				</div> -->
-				<?php $car = session()->get('xe1'); ?>
+				</div>
+				
 				<div class="compare-car card-header">
 					<p class="text-title">{{ $car->cars_name }}</p>
 					<img src="server/img/cars/{{ $car->cars_image }}" style="width: 90%">
@@ -26,7 +29,7 @@
 				</div>
 				<div class="compare-car card-body">
 					<div class="solidline"></div>
-					<h2 class="text-title">Kích thước</h2>
+					<h2 class="text-title">Tổng thể</h2>
 					<h4>Tổng thể: <span>3954 x 1740 x 1416</span></h4>
 					<h4>Chiều dài cơ sở: <span>2469</span></h4>
 					<h4>Mâm xe: <span>Hợp kim 15.00"</span></h4>
@@ -43,7 +46,7 @@
 				</div>
 				<div class="compare-car card-body">
 					<div class="solidline"></div>
-					<h2 class="text-title">Vận hành</h2>
+					<h2 class="text-title">Kỹ thuật</h2>
 					<h4>Hộp số: <span>Tự động</span></h4>
 					<h4>Kiểu dẫn động: <span>Cầu trước</span></h4>
 					<h4>Hệ thống phanh trước: <span>Đĩa</span></h4>
@@ -54,16 +57,10 @@
 				</div>
 				<div class="compare-car card-body">
 					<div class="solidline"></div>
-					<h2 class="text-title">Tiêu thụ nhiên liệu</h2>
+					<h2 class="text-title">Trang bị</h2>
 					<h4>Dung tích bình nhiên liệu: <span>45L</span></h4>
 				</div>
-				<div class="compare-car card-body">
-					<div class="solidline"></div>
-					<h2 class="text-title">Nội thất</h2>
-					<h4>Ghế ngồi: <span>Da</span></h4>
-					<h4>Điều hòa không khí: <span>Chỉnh, gập điện</span></h4>
-					<h4>Cửa sổ trời: <span>1 cửa sổ trời</span></h4>
-				</div>
+				
 			</div>
 		</div>
 		<div class="col-lg-6 second_compare">
