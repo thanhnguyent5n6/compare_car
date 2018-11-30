@@ -54,14 +54,4 @@ class AdminController extends Controller
         session()->forget('user');
         return redirect()->route('admin.get.login');
     }
-    public function getCrawl()
-    {
-        return view('server.crawl');
-    }
-    public function postCrawl(Request $req)
-    {
-        $url = $req->url;
-        
-        echo 1;die;
-    }
 }

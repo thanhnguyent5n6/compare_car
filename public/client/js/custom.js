@@ -399,6 +399,7 @@ function add_compare(id)
       type: 'GET',
     }).done(function(response) {
         $('#content-compare').html(response);
+        data = JSON.parse(response);
     });
 }
 $(document).ready(function(){

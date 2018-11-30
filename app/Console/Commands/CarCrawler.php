@@ -37,7 +37,7 @@ class CarCrawler extends Command
      */
     public function handle()
     {
-        // $list_url = array(
+        $list_url = array(
             // //Honda
             // [
             //     'url'=>'https://vnexpress.net/interactive/2016/bang-gia-xe/sedan-accord-562.html',
@@ -706,7 +706,7 @@ class CarCrawler extends Command
             //     'url'=>'https://vnexpress.net/interactive/2016/bang-gia-xe/mpv-vito-tourer-121-2073.html',
             //     'hang'=>'Mercedes',
             // ],
-            //[
+            // [
             //  'url'=>'https://vnexpress.net/interactive/2016/bang-gia-xe/sedan-ghibli-1864.html',
             //  'hang'=>'Maserati',
             // ],
@@ -920,25 +920,13 @@ class CarCrawler extends Command
 
 
 
-            // [
-            //  'url'=>'https://vnexpress.net/interactive/2016/bang-gia-xe/sedan-sunny-xv-265.html',
-            //  'hang'=>'Nissan',
-            // ],
+            
 
 
 
 
             // [
             //  'url'=>'https://vnexpress.net/interactive/2016/bang-gia-xe/sedan-teana-2-5-sl-564.html',
-            //  'hang'=>'Nissan',
-            // ],
-
-
-
-
-
-            // [
-            //  'url'=>'https://vnexpress.net/interactive/2016/bang-gia-xe/suv-x-trail-2-0-2wd-1869.html',
             //  'hang'=>'Nissan',
             // ],
 
@@ -1438,7 +1426,7 @@ class CarCrawler extends Command
             //  'url'=>'https://vnexpress.net/interactive/2016/bang-gia-xe/suv-xc90-momentum-1896.html',
             //  'hang'=>'Volvo',
             // ],
-        // );
+        );
         foreach($list_url as $key => $value)
         {
             $this->crawl_vnexpress($value['url'],$value['hang']);

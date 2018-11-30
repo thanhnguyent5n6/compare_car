@@ -2756,3 +2756,24 @@ img {
 	font-weight: 400;
 	color: #ff0000;
 }
+.first_compare h4 span {
+	float: right;
+}
+.first_compare h4 {
+	height: 18px;
+}
+.compare-car img {
+	height: 225px;
+}
+.compare-car {
+	height: 450px;
+}
+.wrap_compare h4 {
+	height: 18px;
+}
+.wrap_compare span{
+	height: 18px;
+}
+.wrap_compare h2{
+	height: 33px;
+}

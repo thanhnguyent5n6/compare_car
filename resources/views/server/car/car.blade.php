@@ -12,6 +12,21 @@
                           </header>
                           <div class="panel-body">
                               <section id="unseen">
+                                <label style="margin-left: 20px;">Danh mục: </label>
+                                  <select onchange="change_category()" style="margin: 0px 0px 10px 10px;" class="select-view-car form-control" id="sel_category_car">
+                                    <option value="0">Chọn hãng</option>
+                                    @foreach($categories as $rows)
+                                    <option value="{{ $rows->category_cars_id }}">{{ $rows->category_cars_name }}</option>
+                                    @endforeach
+                                  </select>
+                                <label  style="margin-left: 20px;">Kiểu dáng: </label>
+                                  <select onchange="change_style()"  style="margin: 0px 0px 10px 10px;" class="select-view-car form-control" id="sel_style_car">
+                                    <option value="0">Chọn kiểu dáng</option>
+
+                                    @foreach($style as $rows)
+                                    <option value="{{ $rows->style_cars_id }}">{{ $rows->style_cars_name }}</option>
+                                    @endforeach
+                                  </select>
                                 <div class="pull-left">
                                   <!-- <button style="margin-bottom: 10px;" class="btn-add-new btn btn-primary">Thêm mới</button> -->
                                   <!-- <button id="add-car-modal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".add-car-modal">Thêm mới</button> -->
@@ -19,24 +34,21 @@
                                   @if(!empty(session()->has('success')))
                                     <h5>{{ session()->get('success') }}</h5>
                                   @endif
-
+                                  
                                 </div>
+
                                 <nav class="pull-right navbar navbar-light bg-light" style="margin: 0;">
-                                  <form class="form-inline">
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Nhập từ khóa..." aria-label="Tìm kiếm">
+                                  <form class="form-inline" action="{{ route('admin.car.search') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input name="search_car" class="form-control mr-sm-2" type="search" placeholder="Nhập từ khóa..." aria-label="Tìm kiếm">
                                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
                                   </form>
                                 </nav>
                                 </div>
-                                <!-- <label style="margin-left: 20px;">Hiển thị: </label>
-                                  <select style="margin: 0px 0px 10px 10px;" class="select-view-car form-control">
-                                    <option>10</option>
-                                    <option>20</option>
-                                    <option>50</option>
-                                    <option>100</option>
-                                  </select> -->
+                                
                                 
                                 <div class="clearfix"></div>
+                                <div id="loading"></div>
                                 <div class="list-car margin-t20">
                                   <div class="row">
                                     <!-- box car -->
@@ -53,16 +65,15 @@
                                         <div class="card-body">
                                           <h5 class="card-title"><span class="font-weight-bold">Tên: </span>{{ $car->cars_name }}</h5>
                                           <p class="card-text"><span class="font-weight-bold">Giá: </span>{{ number_format($car->cars_promotion_price) }}đ</p>
-                                          <p class="card-text"><span class="font-weight-bold">Trạng thái: </span> <button class="btn btn-success btn-xs btn-hienthi"><i class="fa fa-check"></i></button>
-                                            <button class="btn btn-danger btn-xs btn-khonghienthi"><i class="fa fa-times"></i></button></p>
+                                          <!-- <p class="card-text"><span class="font-weight-bold">Trạng thái: </span> <button class="btn btn-success btn-xs btn-hienthi"><i class="fa fa-check"></i></button>
+                                            <button class="btn btn-danger btn-xs btn-khonghienthi"><i class="fa fa-times"></i></button></p> -->
                                         </div>
                                       </div>
                                     </div>
                                     <!-- end box-car -->
                                     @endforeach
                                   </div>
-                                </div>
-                              <nav aria-label="Page navigation example">
+                                  <nav aria-label="Page navigation example">
                                 <ul class="pull-right pagination">
                                   
                                   <li class="page-item"></li>
@@ -70,6 +81,8 @@
                                   </li>
                                 </ul>
                               </nav>
+                                </div>
+                              
                               </section>
                           </div>
                       </section>
@@ -920,7 +933,7 @@
                       <label for="edit_cars_seat_glass_door">Cửa kính ghế lái </label>
                     </div>
                     <div class="col-lg-6">
-                      <input id="edit_cars_seat_glass_door" class="form-control" type="text" name="edit_cars_seat_glass_door" value="{{ $car->edit_cars_seat_glass_door }}">
+                      <input id="edit_cars_seat_glass_door" class="form-control" type="text" name="edit_cars_seat_glass_door">
                     </div>
                   </div>
                   <div class="col-lg-4">
@@ -928,7 +941,7 @@
                       <label for="edit_cars_speakers">Hệ thống loa (cái) :</label>
                     </div>
                     <div class="col-lg-6">
-                      <input id="edit_cars_speakers" class="form-control" type="text" name="edit_cars_speakers" value="{{ $car->edit_cars_speakers }}">
+                      <input id="edit_cars_speakers" class="form-control" type="text" name="edit_cars_speakers">
                     </div>
                   </div>
                 </div>

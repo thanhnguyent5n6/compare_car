@@ -72,8 +72,14 @@ class CompareController extends Controller
         if( !session()->has('first_car') )
         {
             session()->put('first_car',$car);
-            return view('client.compare.oneCar',compact('category','style'));
-        }else{
+            $cars_info = session()->get('first_car');
+            $cars_same_style = Car::where('cars_style_id','=',$cars_info->cars_style_id)->paginate(4);
+            $cars_same_category = Car::where('cars_category_id','=',$cars_info->cars_category_id)->paginate(4);
+
+            return view('client.compare.oneCar',compact('category','style','cars_same_category','cars_same_style'));
+        }
+        else
+        {
             session()->put('second_car',$car);
             return view('client.compare.twoCar',compact('category','style'));
         }
@@ -90,12 +96,20 @@ class CompareController extends Controller
         if($first_car->cars_id == $id)
         {
             session(['first_car'=>$second_car]);
-            return view('client.compare.oneCar',compact('category','style'));
+            $cars_info = session()->get('first_car');
+            $cars_same_style = Car::where('cars_style_id','=',$cars_info->cars_style_id)->orderBy('cars_id','asc')->paginate(4);
+            $cars_same_category = Car::where('cars_category_id','=',$cars_info->cars_category_id)->orderBy('cars_id','asc')->paginate(4);
+
+            return view('client.compare.oneCar',compact('category','style','cars_same_category','cars_same_style'));
         }
         else
         {
             session()->forget('second_car');
-            return view('client.compare.oneCar',compact('category','style'));
+            $cars_info = session()->get('first_car');
+            $cars_same_style = Car::where('cars_style_id','=',$cars_info->cars_style_id)->paginate(4);
+            $cars_same_category = Car::where('cars_category_id','=',$cars_info->cars_category_id)->paginate(4);
+
+            return view('client.compare.oneCar',compact('category','style','cars_same_category','cars_same_style'));
         }
 
     }

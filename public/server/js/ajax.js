@@ -349,3 +349,41 @@ function uploadImage(){
     $('.cars_avt').attr('src','/server/img/cars/'+response);
    });
 }
+
+
+$(document).ready(function(){
+  // PHƯƠNG THỨC SHOW HÌNH LOADING
+    function loading_show(){
+        $('#loading').html('<img src="img/loading.gif" style="height: 300px; margin-left: 30%; ">').fadeIn('fast');
+    }
+
+    // PHƯƠNG THỨC ẨN HÌNH LOADING
+    function loading_hide(){
+        $('#loading').fadeOut('fast');
+    }
+    
+
+
+    
+})
+// xem theo danh mục
+function change_category(){
+  var id = $('#sel_category_car').val();
+  $.ajax({
+    url: '/admin/cars/searchCategory/'+id,
+    type: 'GET',
+  }).done(function(response){
+    $('.list-car').html(response);
+  });
+}
+
+// xem theo kiểu dáng
+function change_style(){
+  var id = $('#sel_style_car').val();
+  $.ajax({
+    url: '/admin/cars/searchStyle/'+id,
+    type: 'GET',
+ }).done(function(response){
+    $('.list-car').html(response);
+ });
+}

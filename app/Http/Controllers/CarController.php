@@ -19,15 +19,27 @@ class CarController extends Controller
         $cars = Car::paginate(25);
         $categories = CategoryCar::all();
         $style = StyleCar::all();
-
-        $arr = Array();
-        $arr['cars'] = $cars;
-        $arr['category'] = $categories;
-        $arr['style'] = $style;
         
         return view('server.car.car',compact('categories','style','cars'));
     }
-
+    // public function getListCar($page)
+    // {
+    //     // KHỞI TẠO SỐ PHẦN TỬ TRÊN TRANG
+    //     $record_per_page = 25;   
+    //     // LẤY GIÁ TRỊ PAGE THÔNG QUA PHƯƠNG THỨC POST
+    //     $page = isset($page)?$page:1; 
+    //     // LẤY TỔNG SỐ LƯỢNG XE
+    //     $total = Car::count();
+    //     // SỐ TRANG
+    //     $number_page = ceil($total/$record_per_page);
+    //     $from = $page * $record_per_page;
+    //     // LẤY XE
+    //     $cars = Car::orderBy('cars_id')->limit($form,$record_per_page);
+    //     $categories = CategoryCar::all();
+    //     $style = StyleCar::all();
+    //     // TRẢ VỀ VIEW
+    //     return view('server.car.listCar',compact('categories','style','cars'));
+    // }
     /**
      * Show the form for creating a new resource.
      *
@@ -460,5 +472,38 @@ class CarController extends Controller
             DB::table('tbl_cars')->where('cars_id',$id)->update(['cars_image'=>$cars_image]);
             return $cars_image;
         }
+    }
+
+    public function search(Request $req)
+    {
+        $cars = Car::where('cars_name','like','%'.$req->search_car.'%')->paginate(25);
+        $categories = CategoryCar::all();
+        $style = StyleCar::all();
+        
+        return view('server.car.searchCar',compact('categories','style','cars'));
+    }
+    public function searchCategory($id)
+    {
+        if($id == 0)
+        {
+            $cars = Car::paginate(25);
+            $categories = CategoryCar::all();
+            $style = StyleCar::all();
+            return view('server.car.searchCarCategory',compact('categories','style','cars'));
+        }
+        else
+        {
+            $cars = Car::where('cars_category_id','=',$id)->paginate(25);
+            $categories = CategoryCar::all();
+            $style = StyleCar::all();
+            return view('server.car.searchCarCategory',compact('categories','style','cars'));
+        }
+    }
+    public function searchStyle($id)
+    {
+        $cars = Car::where('cars_style_id','=',$id)->paginate(25);
+        $categories = CategoryCar::all();
+        $style = StyleCar::all();
+        return view('server.car.searchCarStyle',compact('categories','style','cars'));
     }
 }

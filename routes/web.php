@@ -31,6 +31,9 @@ Route::group(array('prefix'=>'/admin','middleware'=>'CheckAdmin'),function(){
     //cars
     Route::resource('/cars','CarController');
     Route::get('cars/edit/{id}','CarController@edit');
+    Route::post('cars/search','CarController@search')->name('admin.car.search');
+    Route::get('cars/searchCategory/{id}','CarController@searchCategory');
+    Route::get('cars/searchStyle/{id}','CarController@searchStyle');
     //Route::get('/cars/edit/{id}','CarController@edit')->name('cars-edit');
     //Route::post('/cars/edit/{id}','CarController@edit')->name('cars-update');
     Route::post('/cars/edit/{id}','CarController@do_edit')->name('cars-update');
@@ -51,8 +54,8 @@ Route::group(array('prefix'=>'/admin','middleware'=>'CheckAdmin'),function(){
     Route::post('style-cars-do-edit/{id}','StyleCarController@doEdit')->name('style-cars-edit');
 
     //crawl data
-    Route::get('crawl','AdminController@getCrawl')->name('admin.crawl');
-    Route::post('post-crawl','AdminController@postCrawl')->name('admin.post.crawl');
+    Route::get('crawl','CrawlerController@index')->name('admin.crawl');
+    Route::post('post-crawl','CrawlerController@store')->name('admin.post.crawl');
 });
 
 // FRONT END
